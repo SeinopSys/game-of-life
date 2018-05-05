@@ -1,0 +1,84 @@
+<app-game-board class="can-fade" [class.faded]="generating"></app-game-board>
+<div id="controls">
+  <div class="row">
+    <div class="col s12 m8 offset-m2 l6 offset-l3">
+      <div class="row">
+        <div class="s12">
+          <p class="can-fade" [class.faded]="generating">
+            <strong>Nemzedék:</strong> {{ currentGeneration }} &bull;
+            <strong>Népesség:</strong> {{ currentPopulation }}
+          </p>
+        </div>
+        <div class="s12 valign-wrapper">
+          <button class="col s2 waves-effect waves-light btn green"
+                  (click)="start()"
+                  [disabled]="!parsedFile || !paused || generating"
+                  title="Indítás">
+            <i class="material-icons">play_arrow</i>
+          </button>
+          <button class="col s2 m2 waves-effect waves-light btn orange darken-4"
+                  (click)="pause()"
+                  [disabled]="!parsedFile || paused || generating"
+                  title="Szünet">
+            <i class="material-icons">pause</i>
+          </button>
+          <button class="col s2 m2 waves-effect waves-light btn brown darken-1"
+                  (click)="stepBackward()"
+                  [disabled]="!parsedFile || !paused || generating || currentGeneration <= 0"
+                  title="Előző generáció">
+            <i class="material-icons">skip_previous</i>
+          </button>
+          <button class="col s2 m2 waves-effect waves-light btn brown darken-1"
+                  (click)="stepForward()"
+                  [disabled]="!parsedFile || !paused || generating"
+                  title="Következő generáció">
+            <i class="material-icons">skip_next</i>
+          </button>
+          <div class="col s1 m1 waves-input-wrapper">
+            <input class="center-align black-text"
+                   (keypress)="generationInputKeypress($event)"
+                   [disabled]="!parsedFile || !paused || generating"
+                   [value]="currentGeneration"
+                   type="number"
+                   min="0"
+                   step="1"
+                   title="Jelenlegi generáció"
+                   id="generation-input">
+          </div>
+          <button class="col s1 m1 waves-effect waves-light btn black"
+                  (click)="updateGeneration()"
+                  [disabled]="!parsedFile || !paused || generating"
+                  title="Generáció módosítása"
+                  id="generation-edit">
+            <i class="material-icons">mode_edit</i>
+          </button>
+          <button class="col s2 m2 waves-effect waves-light btn blue accent-3"
+                  [disabled]="generating"
+                  [class.move-about]="!parsedFile"
+                  (click)="clickFileInput()">
+            <i class="material-icons">file_upload</i>
+          </button>
+        </div>
+      </div>
+      <div *ngIf="generating" class="progress">
+        <div class="determinate" [style.width]="(100*(generatedAlready/generateTarget))+'%'"></div>
+      </div>
+      <div class="card grey lighten-3" id="file-info">
+        <div class="card-content black-text">
+      <span class="card-title">
+        <span *ngIf="selectedFile" class="green-text">{{ selectedFile.name }}</span>
+        <span *ngIf="!selectedFile" class="blue-text text-accent-3 text-darken-4">Válassz egy fájlt!</span>
+        <small class="blue-grey-text" *ngIf="parsedFile"><br>Fájlverzió: {{ parsedFile.getVersion() }}</small>
+      </span>
+          <div *ngIf="(parsing || parseError)">
+            <span *ngIf="parsing">Fájl beolvasása folyamatban&hellip;</span>
+            <span *ngIf="parseError" id="parse-error">Hiba a fájl beolvasása közben: {{ parseError.message }}</span>
+          </div>
+          <div *ngIf="parsedFile">
+            <pre id="description">{{ parsedFile.getDescription() }}</pre>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

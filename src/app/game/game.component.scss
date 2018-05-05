@@ -1,0 +1,34 @@
+#file-info ul {
+  list-style-position: inside;
+}
+
+#parse-error {
+  color: #a00;
+  font-weight: bold;
+}
+
+#generation-input::-webkit-inner-spin-button {
+  display: none;
+}
+
+.progress .determinate {
+  transition: none !important;
+}
+
+#description:empty {
+  display: none;
+}
+
+.move-about {
+  will-change: transform;
+  animation: move-about 1s ease-in-out infinite;
+}
+
+@keyframes move-about {
+  from, to {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.05);
+  }
+}

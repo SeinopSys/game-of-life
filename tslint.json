@@ -18,7 +18,6 @@
     "forin": true,
     "import-blacklist": [
       true,
-      "rxjs",
       "rxjs/Rx"
     ],
     "import-spacing": true,
@@ -37,12 +36,11 @@
       true,
       {
         "order": [
-          "public-static-field",
-          "private-static-field",
-          "public-instance-field",
-          "private-instance-field",
+          "static-field",
+          "instance-field",
           "public-static-method",
           "private-static-method",
+          "public-constructor",
           "public-instance-method",
           "private-instance-method"
         ]
@@ -74,7 +72,9 @@
     "no-string-literal": false,
     "no-string-throw": true,
     "no-switch-case-fall-through": true,
-    "no-trailing-whitespace": true,
+    "no-trailing-whitespace": [
+      "ignore-template-strings"
+    ],
     "no-unnecessary-initializer": true,
     "no-unused-expression": true,
     "no-use-before-declare": true,

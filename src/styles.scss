@@ -1,4 +1,19 @@
+html, body {
+  height: 100%;
+  width: 100%;
+}
+
 body {
   font-family: sans-serif;
   text-align: center;
+  overflow: auto;
+}
+
+.can-fade {
+  transition: opacity .5s linear;
+  will-change: opacity;
+
+  &.faded {
+    opacity: .4;
+  }
 }

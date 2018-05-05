@@ -8,10 +8,10 @@ export class CellBlock {
   /**
    * Élő cellák helye az eltolt ponthoz relatívan
    */
-  public blocks: Point[];
+  public points: Point[];
 
   constructor(offset: Point, blocks: Point[]) {
     this.offset = offset;
-    this.blocks = blocks;
+    this.points = blocks;
   }
 }

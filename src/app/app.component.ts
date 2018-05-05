@@ -6,5 +6,9 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  title = 'Game of Life';
+  title = 'Game of Life Player';
+
+  constructor() {
+    document.title = this.title;
+  }
 }

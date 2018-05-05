@@ -1,20 +1,32 @@
 export class RuleSpecification {
   /**
-   * A túléléshez szükséges szomszédos cellák számai
+   * A túléléshez szükséges szomszédos cellák számai, indexelve
    */
-  survival: number[];
+  survival: { [key: number]: true } = {};
   /**
-   * A születéshez szükséges szomszédos cellák számai
+   * A születéshez szükséges szomszédos cellák számai, indexelve
    */
-  birth: number[];
+  birth: { [key: number]: true } = {};
 
   static getDefault(): RuleSpecification {
     return new RuleSpecification('23', '3');
   }
 
   constructor(survival: string, birth: string) {
-    this.survival = this.convertInput(survival);
-    this.birth = this.convertInput(birth);
+    this.convertInput(survival).forEach(el => {
+      this.survival[el] = true;
+    });
+    this.convertInput(birth).forEach(el => {
+      this.birth[el] = true;
+    });
+  }
+
+  willStayAlive(neighborCount: number) {
+    return this.survival[neighborCount] === true;
+  }
+
+  willBeBorn(neighborCount: number) {
+    return this.birth[neighborCount] === true;
   }
 
   /**

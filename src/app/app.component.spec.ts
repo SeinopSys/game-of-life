@@ -1,11 +1,21 @@
 import { TestBed, async } from '@angular/core/testing';
 import { AppComponent } from './app.component';
+import { GameComponent } from './game/game.component';
+import { ParserService } from './parser.service';
+import { DrawingService } from './drawing.service';
+import { GameBoardComponent } from './game-board/game-board.component';
 describe('AppComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [
-        AppComponent
+        AppComponent,
+        GameComponent,
+        GameBoardComponent,
       ],
+      providers: [
+        ParserService,
+        DrawingService,
+      ]
     }).compileComponents();
   }));
   it('should create the app', async(() => {
